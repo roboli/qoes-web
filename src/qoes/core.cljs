@@ -5,7 +5,7 @@
             [qoes.theme :refer [custom-theme]]
             [qoes.phone :refer [phone]]))
 
-(def phone-number (r/atom ""))
+(def state (r/atom {:phone-number ""}))
 
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}})
@@ -24,10 +24,10 @@
 
 (defn number-text []
   [:> mui/TextField {:fullWidth true
-                     :value @phone-number}])
+                     :value (:phone-number @state)}])
 
 (defn update-number [num]
-  (swap! phone-number #(str %1 num)))
+  (swap! state update-in [:phone-number] str num))
 
 (defn main []
   [:> mui/MuiThemeProvider
