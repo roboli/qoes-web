@@ -5,6 +5,8 @@
             [qoes.theme :refer [custom-theme]]
             [qoes.phone :refer [phone]]))
 
+(def phone-number (r/atom ""))
+
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}})
 
@@ -20,12 +22,20 @@
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (.-spacer classes)}])
 
+(defn number-text []
+  [:> mui/TextField {:fullWidth true
+                     :value @phone-number}])
+
+(defn update-number [num]
+  (swap! phone-number #(str %1 num)))
+
 (defn main []
   [:> mui/MuiThemeProvider
    {:theme custom-theme}
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]
-   [phone]])
+   [number-text]
+   [phone update-number]])
 
 (r/render [main]
           (js/document.getElementById "app"))
