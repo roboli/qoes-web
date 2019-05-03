@@ -5,7 +5,8 @@
             [qoes.theme :refer [custom-theme]]
             [qoes.phone :refer [phone]]))
 
-(def state (r/atom {:phone-number ""}))
+(def state (r/atom {:operator "UNKNOWN"
+                    :phone-number ""}))
 
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}})
@@ -22,6 +23,10 @@
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (.-spacer classes)}])
 
+(defn operator-label []
+  [:> mui/Typography {:variant "h4"
+                      :align "center"} (:operator @state)])
+
 (defn number-text []
   [:> mui/TextField {:fullWidth true
                      :value (:phone-number @state)}])
@@ -34,6 +39,7 @@
    {:theme custom-theme}
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]
+   [operator-label]
    [number-text]
    [phone update-number]])
 
