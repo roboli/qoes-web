@@ -3,10 +3,10 @@
             ["@material-ui/core" :as mui]
             ["@material-ui/core/styles" :refer [withStyles]]
             [qoes.theme :refer [custom-theme]]
-            [qoes.phone :refer [phone]]))
+            [qoes.phone :refer [phone]]
+            [qoes.operators :refer [identify-op]]))
 
-(def state (r/atom {:operator "UNKNOWN"
-                    :phone-number ""}))
+(def state (r/atom {:phone-number ""}))
 
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}})
@@ -24,8 +24,9 @@
   [:div {:class (.-spacer classes)}])
 
 (defn operator-label []
-  [:> mui/Typography {:variant "h4"
-                      :align "center"} (:operator @state)])
+  (let [op (identify-op (subs (:phone-number @state) 0 4))]
+    [:> mui/Typography {:variant "h4"
+                        :align "center"} op]))
 
 (defn number-text []
   [:> mui/TextField {:fullWidth true
