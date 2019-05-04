@@ -66,7 +66,7 @@
 
 (defn identify-op [phone]
   (or
-   (->> (filter #(and (<= (second %) phone) (<= phone (last %))) op-ranges)
-        (first)
+   (->> op-ranges
+        (some #(when (and (<= (second %) phone) (<= phone (last %))) %))
         (first))
    UNKNOWN))
