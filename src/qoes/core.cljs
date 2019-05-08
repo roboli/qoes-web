@@ -32,6 +32,12 @@
   [:> mui/TextField {:fullWidth true
                      :value (:phone-number @state)}])
 
+(defn drop-last-str [v]
+  (apply str (drop-last (vec v))))
+
+(defn rm-number []
+  [:span {:on-click (fn [] (swap! state update-in [:phone-number] drop-last-str))} "X"])
+
 (defn update-number [num]
   (swap! state update-in [:phone-number] str num))
 
@@ -41,7 +47,9 @@
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-label]
-   [number-text]
+   [:div
+    [number-text]
+    [rm-number]]
    [phone update-number]])
 
 (r/render [main]
