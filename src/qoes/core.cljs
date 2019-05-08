@@ -2,6 +2,7 @@
   (:require [reagent.core :as r]
             ["@material-ui/core" :as mui]
             ["@material-ui/core/styles" :refer [withStyles]]
+            ["@material-ui/icons" :as mui-icons]
             [qoes.theme :refer [custom-theme]]
             [qoes.phone :refer [phone]]
             [qoes.operators :refer [identify-op]]))
@@ -36,7 +37,8 @@
   (apply str (drop-last (vec v))))
 
 (defn rm-number []
-  [:span {:on-click (fn [] (swap! state update-in [:phone-number] drop-last-str))} "X"])
+  [:> mui/IconButton {:on-click (fn [] (swap! state update-in [:phone-number] drop-last-str))}
+   [:> mui-icons/Backspace]])
 
 (defn update-number [num]
   (swap! state update-in [:phone-number] str num))

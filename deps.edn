@@ -1,5 +1,6 @@
 {:deps {org.clojure/clojurescript {:mvn/version "1.10.516"}
         com.bhauman/figwheel-main {:mvn/version "0.2.0"}
         reagent {:mvn/version "0.8.1"}
-        cljsjs/material-ui {:mvn/version "3.9.3-0"}}
+        cljsjs/material-ui {:mvn/version "3.9.3-0"}
+        cljsjs/material-ui-icons {:mvn/version "3.0.1-0"}}
  :paths ["src" "target" "resources"]}
