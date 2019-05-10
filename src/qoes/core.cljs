@@ -4,6 +4,7 @@
             ["@material-ui/core/styles" :refer [withStyles]]
             ["@material-ui/icons" :as mui-icons]
             [qoes.theme :refer [custom-theme]]
+            [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
             [qoes.operators :refer [identify-op]]))
 
@@ -29,16 +30,11 @@
     [:> mui/Typography {:variant "h4"
                         :align "center"} op]))
 
-(defn number-text []
-  [:> mui/TextField {:fullWidth true
-                     :value (:phone-number @state)}])
-
 (defn drop-last-str [v]
   (apply str (drop-last (vec v))))
 
 (defn rm-number []
-  [:> mui/IconButton {:on-click (fn [] (swap! state update-in [:phone-number] drop-last-str))}
-   [:> mui-icons/Backspace]])
+  (swap! state update-in [:phone-number] drop-last-str))
 
 (defn update-number [num]
   (swap! state update-in [:phone-number] str num))
@@ -50,8 +46,7 @@
    [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-label]
    [:div
-    [number-text]
-    [rm-number]]
+    [number-text (:phone-number @state) rm-number]]
    [phone update-number]])
 
 (r/render [main]
