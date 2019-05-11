@@ -11,4 +11,5 @@
 (defn number-text [value rm-num]
   [:> mui/Input {:fullWidth true
                  :value value
+                 :disableUnderline true
                  :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num})}])

@@ -11,7 +11,9 @@
 (def state (r/atom {:phone-number ""}))
 
 (defn custom-styles [theme]
-  #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}})
+  #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}
+       :top-divider #js {:margin-bottom (* (.. theme -spacing -unit) 2)}
+       :bottom-divider #js {:margin-top (* (.. theme -spacing -unit) 2)}})
 
 (def with-custom-styles (withStyles custom-styles))
 
@@ -24,6 +26,9 @@
 
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (.-spacer classes)}])
+
+(defn divider [{:keys [classes pos] :as props}]
+  [:> mui/Divider {:class (aget classes pos)}])
 
 (defn operator-label []
   (let [op (ops/identify-op (subs (:phone-number @state) 0 4))]
@@ -48,8 +53,9 @@
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-label]
-   [:div
-    [number-text (:phone-number @state) rm-number]]
+   [:> (with-custom-styles (r/reactify-component divider)) {:pos "top-divider"}]
+   [number-text (:phone-number @state) rm-number]
+   [:> (with-custom-styles (r/reactify-component divider)) {:pos "bottom-divider"}]
    [phone update-number]])
 
 (r/render [main]
