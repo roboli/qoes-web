@@ -6,7 +6,7 @@
             [qoes.theme :refer [custom-theme]]
             [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
-            [qoes.operators :refer [identify-op]]))
+            [qoes.operators :as ops]))
 
 (def state (r/atom {:phone-number ""}))
 
@@ -26,9 +26,12 @@
   [:div {:class (.-spacer classes)}])
 
 (defn operator-label []
-  (let [op (identify-op (subs (:phone-number @state) 0 4))]
-    [:> mui/Typography {:variant "h4"
-                        :align "center"} op]))
+  (let [op (ops/identify-op (subs (:phone-number @state) 0 4))]
+     [:img {:src (condp = op
+                   ops/CLARO "img/claro.png"
+                   ops/MOVISTAR "img/movistar.png"
+                   ops/TIGO "img/tigo.png"
+                   "img/question.png")}]))
 
 (defn drop-last-str [v]
   (apply str (drop-last (vec v))))
