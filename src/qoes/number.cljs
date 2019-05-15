@@ -16,6 +16,7 @@
 
 (defn input [{:keys [classes value rm-num] :as props}]
   [:> mui/Input {:class (.-input classes)
+                 :inputProps {:style {:textAlign "center"}}
                  :fullWidth true
                  :value value
                  :disableUnderline true
