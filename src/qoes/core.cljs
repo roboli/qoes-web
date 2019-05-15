@@ -13,7 +13,8 @@
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}
        :top-divider #js {:margin-bottom (* (.. theme -spacing -unit) 2)}
-       :bottom-divider #js {:margin-top (* (.. theme -spacing -unit) 2)}})
+       :bottom-divider #js {:margin-top (* (.. theme -spacing -unit) 2)
+                            :margin-bottom (* (.. theme -spacing -unit) 3)}})
 
 (def with-custom-styles (withStyles custom-styles))
 
