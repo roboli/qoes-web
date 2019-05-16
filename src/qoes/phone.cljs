@@ -40,7 +40,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "2"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "ABC"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -50,7 +50,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "3"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "DEF"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -60,7 +60,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "4"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "GHI"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -70,7 +70,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "5"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "JKL"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -80,7 +80,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "6"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "MNO"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -90,7 +90,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "7"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "PQRS"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -100,7 +100,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "8"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "TUV"]]]]
    [:> mui/Grid {:item true
                  :xs 4}
@@ -110,7 +110,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "9"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "WXYZ"]]]]
    [:> mui/Grid {:item true
                  :xs 4}]
@@ -122,7 +122,7 @@
       [:> mui/Typography {:variant "h5"
                           :class (.-number classes)} "0"]
       [:> mui/Typography {:variant "caption"
-                          :color "secondaryText"
+                          :color "textSecondary"
                           :class (.-text classes)} "+"]]]]
    [:> mui/Grid {:item true
                  :xs 4}]])
