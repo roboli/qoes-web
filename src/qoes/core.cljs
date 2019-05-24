@@ -6,7 +6,8 @@
             [qoes.theme :refer [custom-theme]]
             [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
-            [qoes.operators :as ops]))
+            [qoes.operators :as ops]
+            [qoes.logo :refer [op-logo]]))
 
 (def state (r/atom {:phone-number ""}))
 
@@ -31,13 +32,9 @@
 (defn divider [{:keys [classes pos] :as props}]
   [:> mui/Divider {:class (aget classes pos)}])
 
-(defn operator-label []
+(defn operator-logo []
   (let [op (ops/identify-op (subs (:phone-number @state) 0 4))]
-     [:img {:src (condp = op
-                   ops/CLARO "img/claro.png"
-                   ops/MOVISTAR "img/movistar.png"
-                   ops/TIGO "img/tigo.png"
-                   "img/question.png")}]))
+    [op-logo op]))
 
 (defn drop-last-str [v]
   (apply str (drop-last (vec v))))
@@ -53,7 +50,7 @@
    {:theme custom-theme}
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]
-   [operator-label]
+   [operator-logo]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "top-divider"}]
    [number-text (:phone-number @state) rm-number]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "bottom-divider"}]
