@@ -5,15 +5,20 @@
             [qoes.operators :as ops]))
 
 (def styles
-  #js {:default-enter #js {:transition "opacity 500ms ease-in-out"
-                           :opacity 0}
-       :default-exit #js {:transition "opacity 500ms ease-in-out"
-                          :transitionDelay "500ms"
-                           :opacity 0}
-       :entering #js {:opacity 0}
-       :entered #js {:opacity 1}
-       :exiting #js {:opacity 1}
-       :exited #js {:opacity 0}})
+  #js {:default-enter #js {:transition "opacity 0.9s ease-in-out, height 0.1s linear 0.9s"
+                           :opacity 0
+                           :height 0}
+       :default-exit #js {:transition "opacity 0.9s ease-in-out 1s, height 0.1s linear 0.9s"
+                          :opacity 0
+                          :height 0}
+       :entering #js {:opacity 0
+                      :height 0}
+       :entered #js {:opacity 1
+                     :height "100%"}
+       :exiting #js {:opacity 1
+                     :height "100%"}
+       :exited #js {:opacity 0
+                    :height 0}})
 
 
 (defn logo [showed? src]
@@ -47,6 +52,7 @@
                      :timeout 500} (unknown bool)]]))
 
 (defn op-logo [phone]
-  [:div
+  [:div {:style {:height 180
+                 :textAlign "center"}}
    [trans-unknown phone]
    [trans-logo phone]])
