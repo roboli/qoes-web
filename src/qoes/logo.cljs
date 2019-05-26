@@ -5,12 +5,12 @@
             [qoes.operators :as ops]))
 
 (def styles
-  #js {:default-enter #js {:transition "opacity 0.9s ease-in-out, height 0.1s linear 0.9s"
-                           :opacity 0
-                           :height 0}
-       :default-exit #js {:transition "opacity 0.9s ease-in-out 1s, height 0.1s linear 0.9s"
-                          :opacity 0
-                          :height 0}
+  #js {:to-enter #js {:transition "opacity 0.9s ease-in-out, height 0.1s linear 0.9s"
+                      :opacity 0
+                      :height 0}
+       :to-exit #js {:transition "opacity 0.9s ease-in-out 1s, height 0.1s linear 0.9s"
+                     :opacity 0
+                     :height 0}
        :entering #js {:opacity 0
                       :height 0}
        :entered #js {:opacity 1
@@ -23,7 +23,7 @@
 
 (defn logo [showed? src]
   (fn [status]
-    (let [default (if showed? "default-exit" "default-enter")]
+    (let [default (if showed? "to-exit" "to-enter")]
       (r/as-element [:img {:src src
                            :style (.assign js/Object #js {} (aget styles default) (aget styles status))}]))))
 
@@ -41,7 +41,7 @@
 
 (defn unknown [showed?]
   (fn [status]
-    (let [default (if showed? "default-exit" "default-enter")]
+    (let [default (if showed? "to-exit" "to-enter")]
       (r/as-element [:img {:src "img/question.png"
                            :style (.assign js/Object #js {} (aget styles default) (aget styles status))}]))))
 
