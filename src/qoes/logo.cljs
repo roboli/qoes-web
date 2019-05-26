@@ -5,19 +5,13 @@
             [qoes.operators :as ops]))
 
 (def styles
-  #js {:to-enter #js {:transition "opacity 0.9s ease-in-out, height 0.1s linear 0.9s"
-                      :opacity 0
+  #js {:to-enter #js {:transition "margin-right 0.9s ease-in-out, height 0.1s linear 0.9s"}
+       :to-exit #js {:transition "margin-right 0.9s ease-in-out 1s, height 0.1s linear 0.9s"}
+       :entering #js {:marginRight 1800
                       :height 0}
-       :to-exit #js {:transition "opacity 0.9s ease-in-out 1s, height 0.1s linear 0.9s"
-                     :opacity 0
-                     :height 0}
-       :entering #js {:opacity 0
-                      :height 0}
-       :entered #js {:opacity 1
-                     :height "100%"}
-       :exiting #js {:opacity 1
-                     :height "100%"}
-       :exited #js {:opacity 0
+       :entered #js {:marginRight 0}
+       :exiting #js {:marginRight 1800}
+       :exited #js {:marginRight -1800
                     :height 0}})
 
 
