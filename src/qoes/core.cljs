@@ -1,4 +1,5 @@
 (ns qoes.core
+  (:import [goog.async Debouncer])
   (:require [reagent.core :as r]
             ["@material-ui/core" :as mui]
             ["@material-ui/core/styles" :refer [withStyles]]
@@ -9,7 +10,8 @@
             [qoes.operators :as ops]
             [qoes.logo :refer [op-logo]]))
 
-(def state (r/atom {:phone-number ""}))
+(def state (r/atom {:phone-number ""
+                    :operator ops/UNKNOWN}))
 
 (defn custom-styles [theme]
   #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}
@@ -32,18 +34,31 @@
 (defn divider [{:keys [classes pos] :as props}]
   [:> mui/Divider {:class (aget classes pos)}])
 
+(defn debounce [f interval]
+  (let [dbnc (Debouncer. f interval)]
+    ;; We use apply here to support functions of various arities
+    (fn [& args] (.apply (.-fire dbnc) dbnc (to-array args)))))
+
 (defn operator-logo []
-  (let [op (ops/identify-op (subs (:phone-number @state) 0 4))]
-    [op-logo op]))
+  [op-logo (:operator @state)])
 
 (defn drop-last-str [v]
   (apply str (drop-last (vec v))))
 
+(defn upd-operator [num]
+  (.log js/console num)
+  (swap! state assoc-in [:operator] (ops/identify-op (subs num 0 4))))
+
+(def update-operator
+  (debounce upd-operator 1000))
+
 (defn rm-number []
-  (swap! state update-in [:phone-number] drop-last-str))
+  (swap! state update-in [:phone-number] drop-last-str)
+  (update-operator (:phone-number @state)))
 
 (defn update-number [num]
-  (swap! state update-in [:phone-number] str num))
+  (swap! state update-in [:phone-number] str num)
+  (update-operator (:phone-number @state)))
 
 (defn main []
   [:> mui/MuiThemeProvider

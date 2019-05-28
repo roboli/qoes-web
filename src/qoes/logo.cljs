@@ -7,11 +7,11 @@
 (def styles
   #js {:to-enter #js {:transition "margin-right 0.9s ease-in-out, height 0.1s linear 0.9s"}
        :to-exit #js {:transition "margin-right 0.9s ease-in-out 1s, height 0.1s linear 0.9s"}
-       :entering #js {:marginRight 1800
+       :entering #js {:marginRight 2200
                       :height 0}
        :entered #js {:marginRight 0}
-       :exiting #js {:marginRight 1800}
-       :exited #js {:marginRight -1800
+       :exiting #js {:marginRight 2200}
+       :exited #js {:marginRight -1500
                     :height 0}})
 
 
