@@ -46,8 +46,9 @@
   (apply str (drop-last (vec v))))
 
 (defn upd-operator [num]
-  (.log js/console num)
-  (swap! state assoc-in [:operator] (ops/identify-op (subs num 0 4))))
+  (swap! state assoc-in [:operator] (if (and (>= (count num) 4) (<= (count num) 8))
+                                      (ops/identify-op (subs num 0 4))
+                                      ops/UNKNOWN)))
 
 (def update-operator
   (debounce upd-operator 500))
