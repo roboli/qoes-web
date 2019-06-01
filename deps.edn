@@ -3,5 +3,5 @@
         reagent {:mvn/version "0.8.1"}
         cljsjs/material-ui {:mvn/version "3.9.3-0"}
         cljsjs/material-ui-icons {:mvn/version "3.0.1-0"}
-        cljsjs/react-transition-group {:mvn/version "2.4.0-0"}}
+        cljsjs/react-motion {:mvn/version "0.5.2-0"}}
  :paths ["src" "target" "resources"]}

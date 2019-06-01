@@ -50,7 +50,7 @@
   (swap! state assoc-in [:operator] (ops/identify-op (subs num 0 4))))
 
 (def update-operator
-  (debounce upd-operator 1000))
+  (debounce upd-operator 500))
 
 (defn rm-number []
   (swap! state update-in [:phone-number] drop-last-str)

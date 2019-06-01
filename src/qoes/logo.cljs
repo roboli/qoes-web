@@ -1,52 +1,42 @@
 (ns qoes.logo
   (:require [reagent.core :as r]
-            [react-transition-group :refer [Transition]]
+            [react-motion :refer [Motion TransitionMotion spring]]
             ["@material-ui/core/styles" :refer [withStyles]]
             [qoes.operators :as ops]))
 
-(def styles
-  #js {:to-enter #js {:transition "margin-right 0.9s ease-in-out, height 0.1s linear 0.9s"}
-       :to-exit #js {:transition "margin-right 0.9s ease-in-out 1s, height 0.1s linear 0.9s"}
-       :entering #js {:marginRight 2200
-                      :height 0}
-       :entered #js {:marginRight 0}
-       :exiting #js {:marginRight 2200}
-       :exited #js {:marginRight -1500
-                    :height 0}})
+(def items (r/atom [{:key ops/UNKNOWN
+                     :style {:x 0}
+                     :data {:src "img/question.png"}}]))
 
+(defn build-logo [config]
+  ^{:key (.-key config)} [:img {:src (-> config .-data .-src)
+                                :style #js {:transform (str "translateX(" (-> config .-style .-x) "px)")
+                                            :position "absolute"}}])
 
-(defn logo [showed? src]
-  (fn [status]
-    (let [default (if showed? "to-exit" "to-enter")]
-      (r/as-element [:img {:src src
-                           :style (.assign js/Object #js {} (aget styles default) (aget styles status))}]))))
+(defn build-list [styles]
+  (r/as-element [:div (map build-logo styles)]))
 
-(defn trans-logo [phone]
-  (let [bool (or (= phone ops/CLARO)
-                 (= phone ops/MOVISTAR)
-                 (= phone ops/TIGO))
-        src (condp = phone
-              ops/CLARO "img/claro.png"
-              ops/MOVISTAR "img/movistar.png"
-              "img/tigo.png")]
-    [:div
-     [:> Transition {:in bool
-                     :timeout 500} (logo bool src)]]))
-
-(defn unknown [showed?]
-  (fn [status]
-    (let [default (if showed? "to-exit" "to-enter")]
-      (r/as-element [:img {:src "img/question.png"
-                           :style (.assign js/Object #js {} (aget styles default) (aget styles status))}]))))
-
-(defn trans-unknown [phone]
-  (let [bool (= phone ops/UNKNOWN)]
-    [:div
-     [:> Transition {:in bool
-                     :timeout 500} (unknown bool)]]))
+(defn trans-motion []
+  (let [will-leave (fn [] #js {:x (spring -1100 #js {:stiffness 250, :damping 30})})
+        will-enter (fn [] #js {:x 1100})]
+    [:> TransitionMotion {:willLeave will-leave
+                          :willEnter will-enter
+                          :styles (clj->js @items)} build-list]))
 
 (defn op-logo [phone]
-  [:div {:style {:height 180
-                 :textAlign "center"}}
-   [trans-unknown phone]
-   [trans-logo phone]])
+  (let [src (condp = phone
+              ops/CLARO "img/claro.png"
+              ops/MOVISTAR "img/movistar.png"
+              ops/TIGO "img/tigo.png"
+              "img/question.png")]
+    (swap! items (fn [v]
+                   (if (= (-> v first :key) phone)
+                     [{:key phone
+                       :style {:x -90}
+                       :data {:src src}}]
+                     [{:key phone
+                       :style {:x (spring -90 #js {:stiffness 200, :damping 100})}
+                       :data {:src src}}])))
+    [:div {:style {:height 180
+                   :textAlign "center"}}
+     [trans-motion]]))
