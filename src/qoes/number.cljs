@@ -20,7 +20,12 @@
                  :fullWidth true
                  :autoFocus true
                  :value value
-                 :onChange #(update-num (-> % .-target .-value))
+                 :onChange (fn [str]
+                             (let [num (-> str .-target .-value)]
+                               (if (= (count num) 0)
+                                 (update-num "")
+                                 (if (re-matches #"\d+" num)
+                                   (update-num num)))))
                  :disableUnderline true
                  :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num})}])
 
