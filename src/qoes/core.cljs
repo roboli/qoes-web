@@ -57,6 +57,10 @@
   (swap! state update-in [:phone-number] drop-last-str)
   (update-operator (:phone-number @state)))
 
+(defn change-number [num]
+  (swap! state assoc :phone-number num)
+  (update-operator (:phone-number @state)))
+
 (defn update-number [num]
   (swap! state update-in [:phone-number] str num)
   (update-operator (:phone-number @state)))
@@ -68,7 +72,7 @@
    [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-logo]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "top-divider"}]
-   [number-text (:phone-number @state) rm-number]
+   [number-text (:phone-number @state) change-number rm-number]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "bottom-divider"}]
    [phone update-number]])
 

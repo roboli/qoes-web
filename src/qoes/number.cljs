@@ -14,14 +14,17 @@
    [:> mui/IconButton {:on-click on-click}
     [:> mui-icons/Backspace]]])
 
-(defn input [{:keys [classes value rm-num] :as props}]
+(defn input [{:keys [classes value update-num rm-num] :as props}]
   [:> mui/Input {:class (.-input classes)
                  :inputProps {:style {:textAlign "center"}}
                  :fullWidth true
+                 :autoFocus true
                  :value value
+                 :onChange #(update-num (-> % .-target .-value))
                  :disableUnderline true
                  :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num})}])
 
-(defn number-text [value rm-num]
+(defn number-text [value update-num rm-num]
   (r/create-element (with-custom-styles (r/reactify-component input)) #js{:value value
+                                                                          :update-num update-num
                                                                           :rm-num rm-num}))
