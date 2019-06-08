@@ -1,8 +1,8 @@
 (ns qoes.number
   (:require [reagent.core :as r]
-            ["@material-ui/core" :as mui]
+            ["@material-ui/core" :refer [Input InputAdornment IconButton]]
             ["@material-ui/core/styles" :refer [withStyles]]
-            ["@material-ui/icons" :as mui-icons]))
+            ["@material-ui/icons" :refer [Backspace]]))
 
 (def timer (r/atom nil))
 
@@ -19,12 +19,12 @@
   (js/clearTimeout @timer))
 
 (defn rm-number [{:keys [on-click clear-num] :as props}]
-  [:> mui/InputAdornment {:position "end"}
-   [:> mui/IconButton {:on-click on-click
-                       :onMouseDown (handle-press clear-num)
-                       :onMouseUp handle-release
-                       :onMouseLeave handle-release}
-    [:> mui-icons/Backspace]]])
+  [:> InputAdornment {:position "end"}
+   [:> IconButton {:on-click on-click
+                   :onMouseDown (handle-press clear-num)
+                   :onMouseUp handle-release
+                   :onMouseLeave handle-release}
+    [:> Backspace]]])
 
 (defn map-char [char]
   (cond
@@ -50,15 +50,15 @@
                                            (map-char (last num))))))))
 
 (defn input [{:keys [classes value update-num rm-num clear-num] :as props}]
-  [:> mui/Input {:class (.-input classes)
-                 :inputProps {:style {:textAlign "center"}}
-                 :fullWidth true
-                 :autoFocus true
-                 :value value
-                 :onChange (on-change update-num)
-                 :disableUnderline true
-                 :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num
-                                                                                      :clear-num clear-num})}])
+  [:> Input {:class (.-input classes)
+             :inputProps {:style {:textAlign "center"}}
+             :fullWidth true
+             :autoFocus true
+             :value value
+             :onChange (on-change update-num)
+             :disableUnderline true
+             :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num
+                                                                                  :clear-num clear-num})}])
 
 (defn number-text [value update-num rm-num clear-num]
   (r/create-element (with-custom-styles (r/reactify-component input)) #js{:value value

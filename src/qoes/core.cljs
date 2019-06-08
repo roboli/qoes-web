@@ -1,9 +1,8 @@
 (ns qoes.core
   (:import [goog.async Debouncer])
   (:require [reagent.core :as r]
-            ["@material-ui/core" :as mui]
+            ["@material-ui/core" :refer [MuiThemeProvider AppBar Toolbar Typography Divider]]
             ["@material-ui/core/styles" :refer [withStyles]]
-            ["@material-ui/icons" :as mui-icons]
             [qoes.theme :refer [custom-theme]]
             [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
@@ -22,17 +21,17 @@
 (def with-custom-styles (withStyles custom-styles))
 
 (defn app []
-  [:> mui/AppBar
-    [:> mui/Toolbar
-     [:> mui/Typography {:variant "title"
-                         :color "inherit"}
-      "Que operador es?"]]])
+  [:> AppBar
+   [:> Toolbar
+    [:> Typography {:variant "title"
+                    :color "inherit"}
+     "Que operador es?"]]])
 
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (.-spacer classes)}])
 
 (defn divider [{:keys [classes pos] :as props}]
-  [:> mui/Divider {:class (aget classes pos)}])
+  [:> Divider {:class (aget classes pos)}])
 
 (defn debounce [f interval]
   (let [dbnc (Debouncer. f interval)]
@@ -70,7 +69,7 @@
   (update-operator (:phone-number @state)))
 
 (defn main []
-  [:> mui/MuiThemeProvider
+  [:> MuiThemeProvider
    {:theme custom-theme}
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]

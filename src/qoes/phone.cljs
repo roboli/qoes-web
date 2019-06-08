@@ -1,6 +1,6 @@
 (ns qoes.phone
   (:require [reagent.core :as r]
-            ["@material-ui/core" :as mui]
+            ["@material-ui/core" :refer [Typography Grid]]
             ["@material-ui/core/styles" :refer [withStyles]]))
 
 (defn custom-styles [theme]
@@ -22,110 +22,110 @@
 (def with-custom-styles (withStyles custom-styles))
 
 (defn keyboard [{:keys [classes on-click] :as props}]
-  [:> mui/Grid {:container true
-                :spacing 40}
-   [:> mui/Grid {:item true
-                 :xs 4}
+  [:> Grid {:container true
+            :spacing 40}
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 1)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "1"]
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "1"]
       [:span {:dangerouslySetInnerHTML {:__html "&nbsp;"}}]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 2)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "2"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "ABC"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "2"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "ABC"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 3)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "3"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "DEF"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "3"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "DEF"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 4)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "4"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "GHI"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "4"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "GHI"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 5)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "5"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "JKL"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "5"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "JKL"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 6)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "6"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "MNO"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "6"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "MNO"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 7)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "7"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "PQRS"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "7"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "PQRS"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 8)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "8"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "TUV"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "8"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "TUV"]]]]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 9)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "9"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "WXYZ"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}]
-   [:> mui/Grid {:item true
-                 :xs 4}
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "9"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "WXYZ"]]]]
+   [:> Grid {:item true
+             :xs 4}]
+   [:> Grid {:item true
+             :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 0)}
-      [:> mui/Typography {:variant "h5"
-                          :class (.-number classes)} "0"]
-      [:> mui/Typography {:variant "caption"
-                          :color "textSecondary"
-                          :class (.-text classes)} "+"]]]]
-   [:> mui/Grid {:item true
-                 :xs 4}]])
+      [:> Typography {:variant "h5"
+                      :class (.-number classes)} "0"]
+      [:> Typography {:variant "caption"
+                      :color "textSecondary"
+                      :class (.-text classes)} "+"]]]]
+   [:> Grid {:item true
+             :xs 4}]])
 
 (defn phone [on-click]
   (r/create-element (with-custom-styles (r/reactify-component keyboard)) #js{:on-click on-click}))
