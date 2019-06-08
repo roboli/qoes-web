@@ -1,5 +1,5 @@
 (ns qoes.theme
-  (:require ["@material-ui/core/styles" :refer [createMuiTheme]]))
+  (:require [material-ui :refer [createMuiTheme]]))
 
 (def custom-theme
   (createMuiTheme

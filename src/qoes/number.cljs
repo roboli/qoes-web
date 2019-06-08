@@ -1,13 +1,12 @@
 (ns qoes.number
   (:require [reagent.core :as r]
-            ["@material-ui/core" :refer [Input InputAdornment IconButton]]
-            ["@material-ui/core/styles" :refer [withStyles]]
-            ["@material-ui/icons" :refer [Backspace]]))
+            [material-ui :refer [Input InputAdornment IconButton withStyles]]
+            [material-ui-icons :refer [Backspace]]))
 
 (def timer (r/atom nil))
 
 (defn custom-styles [theme]
-  #js {:input #js {:fontSize (* (.. theme -spacing -unit) 3)}})
+  #js {:input #js {:fontSize (.spacing theme 3)}})
 
 (def with-custom-styles (withStyles custom-styles))
 

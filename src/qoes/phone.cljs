@@ -1,29 +1,28 @@
 (ns qoes.phone
   (:require [reagent.core :as r]
-            ["@material-ui/core" :refer [Typography Grid]]
-            ["@material-ui/core/styles" :refer [withStyles]]))
+            [material-ui :refer [Typography Grid withStyles]]))
 
 (defn custom-styles [theme]
-  #js {:wrapper #js {:height (* (.. theme -spacing -unit) 8)
+  #js {:wrapper #js {:height (.spacing theme 8)
                      :display "flex"
                      :justifyContent "center"
                      :alignItems "center"}
        :button #js {:display "flex"
                     :flexDirection "column"
                     :alignItems "center"
-                    :paddingRight (* (.. theme -spacing -unit) 3)
-                    :paddingLeft (* (.. theme -spacing -unit) 3)
+                    :paddingRight (.spacing theme 3)
+                    :paddingLeft (.spacing theme 3)
                     :cursor "pointer"
                     :userSelect "none"}
        :number #js {:color "#6a81ff"
-                    :marginBottom (* (.. theme -spacing -unit) 1)}
-       :text #js {:fontSize (* (.. theme -spacing -unit) 1.1)}})
+                    :marginBottom (.spacing theme 1)}
+       :text #js {:fontSize (.spacing theme 1.1)}})
 
 (def with-custom-styles (withStyles custom-styles))
 
 (defn keyboard [{:keys [classes on-click] :as props}]
   [:> Grid {:container true
-            :spacing 40}
+            :spacing 4}
    [:> Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}

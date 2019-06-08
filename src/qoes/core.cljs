@@ -1,8 +1,7 @@
 (ns qoes.core
   (:import [goog.async Debouncer])
   (:require [reagent.core :as r]
-            ["@material-ui/core" :refer [MuiThemeProvider AppBar Toolbar Typography Divider]]
-            ["@material-ui/core/styles" :refer [withStyles]]
+            [material-ui :refer [MuiThemeProvider AppBar Toolbar Typography Divider withStyles]]
             [qoes.theme :refer [custom-theme]]
             [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
@@ -13,17 +12,17 @@
                     :operator ops/UNKNOWN}))
 
 (defn custom-styles [theme]
-  #js {:spacer #js {:height (* (.. theme -spacing -unit) 8)}
-       :top-divider #js {:margin-bottom (* (.. theme -spacing -unit) 2)}
-       :bottom-divider #js {:margin-top (* (.. theme -spacing -unit) 2)
-                            :margin-bottom (* (.. theme -spacing -unit) 3)}})
+  #js {:spacer #js {:height (.spacing theme 8)}
+       :top-divider #js {:margin-bottom (.spacing theme 2)}
+       :bottom-divider #js {:margin-top (.spacing theme 2)
+                            :margin-bottom (.spacing theme 3)}})
 
 (def with-custom-styles (withStyles custom-styles))
 
 (defn app []
   [:> AppBar
    [:> Toolbar
-    [:> Typography {:variant "title"
+    [:> Typography {:variant "h5"
                     :color "inherit"}
      "Que operador es?"]]])
 

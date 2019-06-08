@@ -1,7 +1,7 @@
 (ns qoes.logo
   (:require [reagent.core :as r]
             [react-motion :refer [Motion TransitionMotion spring]]
-            ["@material-ui/core/styles" :refer [withStyles]]
+            [material-ui :refer [withStyles]]
             [qoes.operators :as ops]))
 
 (def items (r/atom [{:key ops/UNKNOWN
