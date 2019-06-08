@@ -4,14 +4,26 @@
             ["@material-ui/core/styles" :refer [withStyles]]
             ["@material-ui/icons" :as mui-icons]))
 
+(def timer (r/atom nil))
+
 (defn custom-styles [theme]
   #js {:input #js {:fontSize (* (.. theme -spacing -unit) 3)}})
 
 (def with-custom-styles (withStyles custom-styles))
 
-(defn rm-number [{:keys [on-click] :as props}]
+(defn handle-press [f]
+  (fn []
+    (reset! timer (js/setTimeout f 1000))))
+
+(defn handle-release []
+  (js/clearTimeout @timer))
+
+(defn rm-number [{:keys [on-click clear-num] :as props}]
   [:> mui/InputAdornment {:position "end"}
-   [:> mui/IconButton {:on-click on-click}
+   [:> mui/IconButton {:on-click on-click
+                       :onMouseDown (handle-press clear-num)
+                       :onMouseUp handle-release
+                       :onMouseLeave handle-release}
     [:> mui-icons/Backspace]]])
 
 (defn map-char [char]
@@ -37,7 +49,7 @@
                                            (apply str (drop-last num))
                                            (map-char (last num))))))))
 
-(defn input [{:keys [classes value update-num rm-num] :as props}]
+(defn input [{:keys [classes value update-num rm-num clear-num] :as props}]
   [:> mui/Input {:class (.-input classes)
                  :inputProps {:style {:textAlign "center"}}
                  :fullWidth true
@@ -45,9 +57,11 @@
                  :value value
                  :onChange (on-change update-num)
                  :disableUnderline true
-                 :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num})}])
+                 :endAdornment (r/create-element (r/reactify-component rm-number) #js{:on-click rm-num
+                                                                                      :clear-num clear-num})}])
 
-(defn number-text [value update-num rm-num]
+(defn number-text [value update-num rm-num clear-num]
   (r/create-element (with-custom-styles (r/reactify-component input)) #js{:value value
                                                                           :update-num update-num
-                                                                          :rm-num rm-num}))
+                                                                          :rm-num rm-num
+                                                                          :clear-num clear-num}))

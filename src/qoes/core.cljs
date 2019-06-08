@@ -65,6 +65,10 @@
   (swap! state update-in [:phone-number] str num)
   (update-operator (:phone-number @state)))
 
+(defn clear-number []
+  (swap! state assoc :phone-number "")
+  (update-operator (:phone-number @state)))
+
 (defn main []
   [:> mui/MuiThemeProvider
    {:theme custom-theme}
@@ -72,7 +76,7 @@
    [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-logo]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "top-divider"}]
-   [number-text (:phone-number @state) change-number rm-number]
+   [number-text (:phone-number @state) change-number rm-number clear-number]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "bottom-divider"}]
    [phone update-number]])
 
