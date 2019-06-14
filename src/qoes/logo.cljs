@@ -1,7 +1,6 @@
 (ns qoes.logo
   (:require [reagent.core :as r]
-            [react-motion :refer [Motion TransitionMotion spring]]
-            [material-ui :refer [withStyles]]
+            [cljsjs.react-motion]
             [qoes.operators :as ops]))
 
 (def items (r/atom [{:key ops/UNKNOWN
@@ -17,9 +16,9 @@
   (r/as-element [:div (map build-logo styles)]))
 
 (defn trans-motion []
-  (let [will-leave (fn [] #js {:x (spring -1100 #js {:stiffness 250, :damping 30})})
+  (let [will-leave (fn [] #js {:x (js/ReactMotion.spring -1100 #js {:stiffness 250, :damping 30})})
         will-enter (fn [] #js {:x 1100})]
-    [:> TransitionMotion {:willLeave will-leave
+    [:> js/ReactMotion.TransitionMotion {:willLeave will-leave
                           :willEnter will-enter
                           :styles (clj->js @items)} build-list]))
 
@@ -35,7 +34,7 @@
                        :style {:x -90}
                        :data {:src src}}]
                      [{:key phone
-                       :style {:x (spring -90 #js {:stiffness 200, :damping 100})}
+                       :style {:x (js/ReactMotion.spring -90 #js {:stiffness 200, :damping 100})}
                        :data {:src src}}])))
     [:div {:style {:height 180
                    :textAlign "center"}}

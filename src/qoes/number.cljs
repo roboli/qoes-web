@@ -1,14 +1,13 @@
 (ns qoes.number
   (:require [reagent.core :as r]
-            [material-ui :refer [Input InputAdornment IconButton withStyles]]
-            [material-ui-icons :refer [Backspace]]))
+            ["@material-ui/icons"]))
 
 (def timer (r/atom nil))
 
 (defn custom-styles [theme]
   #js {:input #js {:fontSize (.spacing theme 3)}})
 
-(def with-custom-styles (withStyles custom-styles))
+(def with-custom-styles (js/MaterialUI.withStyles custom-styles))
 
 (defn handle-press [f]
   (fn []
@@ -18,12 +17,12 @@
   (js/clearTimeout @timer))
 
 (defn rm-number [{:keys [on-click clear-num] :as props}]
-  [:> InputAdornment {:position "end"}
-   [:> IconButton {:on-click on-click
+  [:> js/MaterialUI.InputAdornment {:position "end"}
+   [:> js/MaterialUI.IconButton {:on-click on-click
                    :onMouseDown (handle-press clear-num)
                    :onMouseUp handle-release
                    :onMouseLeave handle-release}
-    [:> Backspace]]])
+    [:> js/MaterialUIIcons.Backspace]]])
 
 (defn map-char [char]
   (cond
@@ -49,7 +48,7 @@
                                            (map-char (last num))))))))
 
 (defn input [{:keys [classes value update-num rm-num clear-num] :as props}]
-  [:> Input {:class (.-input classes)
+  [:> js/MaterialUI.Input {:class (.-input classes)
              :inputProps {:style {:textAlign "center"}}
              :fullWidth true
              :autoFocus true

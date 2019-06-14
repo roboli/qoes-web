@@ -1,7 +1,7 @@
 (ns qoes.core
   (:import [goog.async Debouncer])
   (:require [reagent.core :as r]
-            [material-ui :refer [MuiThemeProvider AppBar Toolbar Typography Divider withStyles]]
+            [cljsjs.material-ui]
             [qoes.theme :refer [custom-theme]]
             [qoes.number :refer [number-text]]
             [qoes.phone :refer [phone]]
@@ -17,20 +17,20 @@
        :bottom-divider #js {:margin-top (.spacing theme 2)
                             :margin-bottom (.spacing theme 3)}})
 
-(def with-custom-styles (withStyles custom-styles))
+(def with-custom-styles (js/MaterialUI.withStyles custom-styles))
 
 (defn app []
-  [:> AppBar
-   [:> Toolbar
-    [:> Typography {:variant "h5"
-                    :color "inherit"}
+  [:> js/MaterialUI.AppBar
+   [:> js/MaterialUI.Toolbar
+    [:> js/MaterialUI.Typography {:variant "h5"
+                                     :color "inherit"}
      "Que operador es?"]]])
 
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (.-spacer classes)}])
 
 (defn divider [{:keys [classes pos] :as props}]
-  [:> Divider {:class (aget classes pos)}])
+  [:> js/MaterialUI.Divider {:class (aget classes pos)}])
 
 (defn debounce [f interval]
   (let [dbnc (Debouncer. f interval)]
@@ -68,7 +68,7 @@
   (update-operator (:phone-number @state)))
 
 (defn main []
-  [:> MuiThemeProvider
+  [:> js/MaterialUI.MuiThemeProvider
    {:theme custom-theme}
    [app]
    [:> (with-custom-styles (r/reactify-component spacer))]

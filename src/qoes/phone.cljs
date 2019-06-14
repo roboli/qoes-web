@@ -1,6 +1,5 @@
 (ns qoes.phone
-  (:require [reagent.core :as r]
-            [material-ui :refer [Typography Grid withStyles]]))
+  (:require [reagent.core :as r]))
 
 (defn custom-styles [theme]
   #js {:wrapper #js {:height (.spacing theme 8)
@@ -18,112 +17,112 @@
                     :marginBottom (.spacing theme 1)}
        :text #js {:fontSize (.spacing theme 1.1)}})
 
-(def with-custom-styles (withStyles custom-styles))
+(def with-custom-styles (js/MaterialUI.withStyles custom-styles))
 
 (defn keyboard [{:keys [classes on-click] :as props}]
-  [:> Grid {:container true
+  [:> js/MaterialUI.Grid {:container true
             :spacing 4}
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 1)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "1"]
       [:span {:dangerouslySetInnerHTML {:__html "&nbsp;"}}]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 2)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "2"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "ABC"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 3)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "3"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "DEF"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 4)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "4"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "GHI"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 5)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "5"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "JKL"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 6)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "6"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "MNO"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 7)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "7"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "PQRS"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 8)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "8"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "TUV"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 9)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "9"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "WXYZ"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}
     [:div {:class (.-wrapper classes)}
      [:div {:class (.-button classes)
             :on-click #(on-click 0)}
-      [:> Typography {:variant "h5"
+      [:> js/MaterialUI.Typography {:variant "h5"
                       :class (.-number classes)} "0"]
-      [:> Typography {:variant "caption"
+      [:> js/MaterialUI.Typography {:variant "caption"
                       :color "textSecondary"
                       :class (.-text classes)} "+"]]]]
-   [:> Grid {:item true
+   [:> js/MaterialUI.Grid {:item true
              :xs 4}]])
 
 (defn phone [on-click]
