@@ -27,7 +27,7 @@
      "Que operador es?"]]])
 
 (defn spacer [{:keys [classes] :as props}]
-  [:div {:class (.-spacer classes)}])
+  [:div {:class (aget classes "spacer")}])
 
 (defn divider [{:keys [classes pos] :as props}]
   [:> js/MaterialUI.Divider {:class (aget classes pos)}])
