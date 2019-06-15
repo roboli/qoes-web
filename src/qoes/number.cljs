@@ -1,6 +1,5 @@
 (ns qoes.number
-  (:require [reagent.core :as r]
-            ["@material-ui/icons"]))
+  (:require [reagent.core :as r]))
 
 (def timer (r/atom nil))
 
@@ -22,7 +21,7 @@
                    :onMouseDown (handle-press clear-num)
                    :onMouseUp handle-release
                    :onMouseLeave handle-release}
-    [:> js/MaterialUIIcons.Backspace]]])
+    [:i {:class "material-icons"} "backspace"]]])
 
 (defn map-char [char]
   (cond
