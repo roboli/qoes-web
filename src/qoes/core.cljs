@@ -19,13 +19,6 @@
 
 (def with-custom-styles (js/MaterialUI.withStyles custom-styles))
 
-(defn app []
-  [:> js/MaterialUI.AppBar
-   [:> js/MaterialUI.Toolbar
-    [:> js/MaterialUI.Typography {:variant "h5"
-                                     :color "inherit"}
-     "Que operador es?"]]])
-
 (defn spacer [{:keys [classes] :as props}]
   [:div {:class (aget classes "spacer")}])
 
@@ -70,8 +63,6 @@
 (defn main []
   [:> js/MaterialUI.MuiThemeProvider
    {:theme custom-theme}
-   [app]
-   [:> (with-custom-styles (r/reactify-component spacer))]
    [operator-logo]
    [:> (with-custom-styles (r/reactify-component divider)) {:pos "top-divider"}]
    [number-text (:phone-number @state) change-number rm-number clear-number]

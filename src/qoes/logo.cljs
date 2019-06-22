@@ -19,8 +19,8 @@
   (let [will-leave (fn [] #js {:x (js/ReactMotion.spring -1100 #js {:stiffness 250, :damping 30})})
         will-enter (fn [] #js {:x 1100})]
     [:> js/ReactMotion.TransitionMotion {:willLeave will-leave
-                          :willEnter will-enter
-                          :styles (clj->js @items)} build-list]))
+                                         :willEnter will-enter
+                                         :styles (clj->js @items)} build-list]))
 
 (defn op-logo [phone]
   (let [src (condp = phone
